@@ -1,13 +1,23 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 
+import myfetch from './common/myfetch';
+import './common/mock';
+
 import router from './router'
 import App from './App'
 
-import 'material-design-icons-iconfont/dist/material-design-icons.css' 
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'vuetify/dist/vuetify.min.css'
 
-Vue.use(Vuetify)
+
+Vue.use(Vuetify);
+
+let globalEventHub = new Vue();
+myfetch.globalEventHub = globalEventHub;
+
+Vue.prototype.$myfetch = myfetch;
+Vue.prototype.$globalEventHub = globalEventHub;
 
 new Vue({
   el: '#app',

@@ -11,10 +11,9 @@
     "lint:fix": "eslint --ext .js,.vue src --fix"
   },
   "author": "Leo Zhong",
-  "dependencies": {
-    "buefy": "^0.6.6",
-    "bulma": "^0.7.1",
+  "dependencies": { 
     "echarts": "^4.1.0",
+    "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vuetify": "^1.1.9"
@@ -38,6 +37,7 @@
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-vue": "^4.5.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "fetch-mock": "^6.5.2",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.0.1",

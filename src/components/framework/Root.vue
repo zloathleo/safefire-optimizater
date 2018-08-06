@@ -1,24 +1,24 @@
 <template>
     <v-app dark>
-        <v-navigation-drawer v-model="drawer" clipped temporary fixed app>
-            <v-list dense>
-                <v-list-tile v-for="item in items" @click="toggle(item)" :key="item.key" v-bind:class="{ active: isItemActive(item.key) }">
-                    <v-list-tile-action>
-                        <v-icon>{{ item.key }}</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-            </v-list>
-        </v-navigation-drawer>
         <v-toolbar app fixed clipped-left>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>燃烧优化-水泥</v-toolbar-title>
+            <v-toolbar-title>{{appName}}</v-toolbar-title>
         </v-toolbar>
         <v-content>
-            <v-container fluid fill-height grid-list-md text-xs-center>
-                <router-view></router-view>
+            <v-container fluid fill-height grid-list-md text-xs-center> 
+                <router-view></router-view> 
+                <v-navigation-drawer v-model="drawer" absolute temporary app>
+                    <v-list dense>
+                        <v-list-tile v-for="item in items" @click="toggle(item)" :key="item.key" v-bind:class="{ active: isItemActive(item.key) }">
+                            <v-list-tile-action>
+                                <v-icon>{{ item.key }}</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list>
+                </v-navigation-drawer> 
             </v-container>
         </v-content>
         <v-footer app fixed>
@@ -34,9 +34,11 @@
 </style>
 
 <script>
+import globalvar from '../../common/globalvar'
 export default {
     data() {
         return {
+            appName: globalvar.appName,
             drawer: false,
             activeItem: undefined,
             items: [
