@@ -1,10 +1,18 @@
 <template>
-    <div ref="trendchart" />
-
+    <v-card>
+        <div ref="trendchart" />
+    </v-card>
 </template>
 
 <script> 
-import * as echarts from 'echarts';
+// import * as echarts from 'echarts';
+var echarts = require('echarts/lib/echarts');
+// 引入柱状图
+require('echarts/lib/chart/line');
+// 引入提示框和标题组件
+require('echarts/lib/component/tooltip');
+require('echarts/lib/component/title');
+
 import globalvar from '../../common/globalvar'
 export default {
     components: {
@@ -22,7 +30,7 @@ export default {
         refreshData() {
             let _this = this;
 
-            this.chart.showLoading();
+            this.chart.showLoading(globalvar.loadingConfig);
             this.$myfetch.fetch('/trendchart', { method: 'GET' }, function (json) {
                 _this.chart.hideLoading();
 
@@ -41,7 +49,7 @@ export default {
             });
         },
         _init_chart() {
-            let chartDom = this.$refs.trendchart; 
+            let chartDom = this.$refs.trendchart;
             let _width = globalvar.calcDashboardChartWidth(chartDom.clientWidth);
 
             this.chart = echarts.init(chartDom, undefined, {

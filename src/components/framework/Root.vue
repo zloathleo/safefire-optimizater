@@ -2,11 +2,14 @@
     <v-app dark>
         <v-toolbar app fixed clipped-left>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>{{appName}}</v-toolbar-title>
+            <v-toolbar-title>{{appName}}</v-toolbar-title> 
+            <v-spacer></v-spacer>
+            <ModuleToolbar/>
         </v-toolbar>
         <v-content>
-            <v-container fluid fill-height grid-list-md text-xs-center> 
-                <router-view></router-view> 
+            <v-container fluid grid-list-md>
+                <router-view></router-view>
+
                 <v-navigation-drawer v-model="drawer" absolute temporary app>
                     <v-list dense>
                         <v-list-tile v-for="item in items" @click="toggle(item)" :key="item.key" v-bind:class="{ active: isItemActive(item.key) }">
@@ -18,7 +21,7 @@
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list>
-                </v-navigation-drawer> 
+                </v-navigation-drawer>
             </v-container>
         </v-content>
         <v-footer app fixed>
@@ -35,7 +38,9 @@
 
 <script>
 import globalvar from '../../common/globalvar'
+import ModuleToolbar from './ModuleToolbar.vue'
 export default {
+    components: { ModuleToolbar },
     data() {
         return {
             appName: globalvar.appName,
@@ -43,12 +48,12 @@ export default {
             activeItem: undefined,
             items: [
                 {
-                    title: 'Dashboard',
+                    title: '主页',
                     key: 'dashboard',
                     active: '/',
                 },
                 {
-                    title: 'Settings',
+                    title: '设置',
                     key: 'settings',
                     active: '/',
                 },
@@ -59,8 +64,7 @@ export default {
             return this.activeItem === key;
         },
         toggle(item) {
-            this.activeItem = item.key;
-            console.log(item.key);
+            this.activeItem = item.key; 
             this.$router.push({ name: item.key });
         }
     }

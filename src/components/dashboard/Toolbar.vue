@@ -1,27 +1,21 @@
 <template>
-    <v-toolbar card prominent dense>
+    <div>
+        <v-menu bottom left transition="slide-x-transition">
+            <v-btn slot="activator" color="primary">
+                {{periodItems[selectedPeriodIndex].title}}
+            </v-btn>
+            <v-list>
+                <v-list-tile v-for="(item, index) in periodItems" :key="index" :data-index="index" @click="changePeriod">
+                    <v-list-tile-title :data-index="index">{{ item.title }}</v-list-tile-title>
+                </v-list-tile>
+            </v-list>
+        </v-menu>
         <v-btn icon @click.stop="clickDasCard">
             <v-icon>more_vert</v-icon>
         </v-btn>
-
-        <v-toolbar-title>主页</v-toolbar-title>
-        <v-spacer></v-spacer>
-
-        <v-toolbar-items class="hidden-sm-and-down">
-            <v-menu bottom left transition="slide-x-transition">
-                <v-btn slot="activator" color="primary">
-                    {{periodItems[selectedPeriodIndex].title}}
-                </v-btn>
-                <v-list>
-                    <v-list-tile v-for="(item, index) in periodItems" :key="index" :data-index="index" @click="changePeriod">
-                        <v-list-tile-title :data-index="index">{{ item.title }}</v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-menu>
-        </v-toolbar-items>
-    </v-toolbar>
+    </div>
 </template>
-
+ 
 <script> 
 export default {
     data() {
@@ -43,7 +37,7 @@ export default {
             this.selectedPeriodIndex = parseInt(evt.target.dataset.index);
         },
         clickDasCard() {
-            this.$globalEventHub.$emit("clickDasCard"); 
+            this.$globalEventHub.$emit("clickDasCard");
         }
     }
 }
