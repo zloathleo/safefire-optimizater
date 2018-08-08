@@ -1,9 +1,25 @@
 {
-  "name": "vue-webpack-4",
+  "name": "safefire-optimizater",
   "version": "1.0.0",
-  "description": "A Vuejs template using Webpack 4",
-  "main": "index.js",
+  "description": "safefire-optimizater",
+  "main": "electron-main.js",
+  "build": {
+    "appId": "com.safefire.optimizater",
+    "productName": "safefire-optimizater",
+    "copyright": "Copyright © 2018 safefire",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "./**/*"
+    ],
+    "win": {
+      "icon": "build/resources/logo256.png"
+    }
+  },
   "scripts": {
+    "start": "electron .",
+    "packexe": "electron-builder --ia32",
     "dev": "webpack --watch --config build/webpack.config.dev.js",
     "prod": "webpack --config build/webpack.config.prod.js",
     "prods": "webpack-dev-server --open --progress --config build/webpack.config.prod.js",
@@ -11,7 +27,7 @@
     "lint:fix": "eslint --ext .js,.vue src --fix"
   },
   "author": "Leo Zhong",
-  "dependencies": { 
+  "dependencies": {
     "echarts": "^4.1.0",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.16",
@@ -28,6 +44,8 @@
     "compression-webpack-plugin": "^1.1.11",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
+    "electron": "^2.0.6",
+    "electron-builder": "^20.27.1",
     "eslint": "^5.0.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-loader": "^2.0.0",
