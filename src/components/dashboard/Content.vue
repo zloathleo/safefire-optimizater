@@ -19,17 +19,17 @@
           </v-layout>
 
           <v-layout row wrap>
-            <v-flex xs3>
-              <Gauge/>
+            <v-flex xs6 sm3>
+              <Gauge title="回转窑压力"/>
             </v-flex>
-            <v-flex xs3>
-              <Gauge/>
+            <v-flex xs6 sm3>
+              <Gauge title="一次风温度"/>
             </v-flex>
-            <v-flex xs3>
-              <Gauge/>
+            <v-flex xs6 sm3>
+              <Gauge title="一次风风量"/>
             </v-flex>
-            <v-flex xs3>
-              <Gauge/>
+            <v-flex xs6 sm3>
+              <Gauge title="二次风温度"/>
             </v-flex>
           </v-layout>
         </v-flex>

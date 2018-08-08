@@ -26,12 +26,16 @@ export default {
     },
     mounted() {
         this._init_chart();
+        let _this = this;
+        this.$globalEventHub.$on("periodChanged", function (value) {
+            _this.refreshData();
+        });
     },
     methods: {
         refreshData() {
             let _this = this;
 
-             this.chart.showLoading(globalvar.loadingConfig);
+            this.chart.showLoading(globalvar.loadingConfig);
             this.$myfetch.fetch('/heatchart', { method: 'GET' }, function (json) {
                 _this.chart.hideLoading();
 
@@ -47,7 +51,7 @@ export default {
             });
         },
 
-        _init_chart() { 
+        _init_chart() {
             let chartDom = this.$refs.heatchart;
             let _width = globalvar.calcDashboardChartWidth(chartDom.clientWidth);
 

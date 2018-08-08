@@ -17,6 +17,7 @@ import globalvar from '../../common/globalvar'
 export default {
     components: {
     },
+    props: ['title'],
     data() {
         return {
             chart: undefined,
@@ -91,16 +92,16 @@ export default {
                             },
                         },
                         title: {
-                            textStyle: {         
-                                fontSize: 14, 
-                                color: '#fff', 
+                            textStyle: {
+                                fontSize: 12,
+                                color: '#fff',
                             }
                         },
                         detail: {
                             fontWeight: 'bolder',
                             fontSize: 15
                         },
-                        data: [{ value: 50, name: '完成率' }]
+                        data: [{ value: 50, name: this.title }]
                     }
                 ]
             }

@@ -35,6 +35,8 @@ export default {
     methods: {
         changePeriod(evt) {
             this.selectedPeriodIndex = parseInt(evt.target.dataset.index);
+            let _value = this.periodItems[this.selectedPeriodIndex].value;
+            this.$globalEventHub.$emit("periodChanged", _value);
         },
         clickDasCard() {
             this.$globalEventHub.$emit("clickDasCard");
