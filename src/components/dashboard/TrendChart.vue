@@ -46,7 +46,7 @@ export default {
                     series: [{
                         // 根据名字对应到相应的系列
                         name: 'value',
-                        data: json.data
+                        data: json
                     }]
                 });
 
@@ -58,7 +58,7 @@ export default {
 
             this.chart = echarts.init(chartDom, undefined, {
                 width: _width,
-                height: _width
+                height: _width / 1.334
             });
             this.chart.setOption(this.chartOption);
             this.refreshData();

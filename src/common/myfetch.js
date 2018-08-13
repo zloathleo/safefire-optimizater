@@ -1,5 +1,5 @@
 export default {
-    serverhost: '',
+    serverhost: 'http://192.168.1.92:8080',
     callUsertimeOut: 300 * 1,
     globalEventHub: undefined,
 

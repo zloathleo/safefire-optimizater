@@ -13,6 +13,6 @@ export default {
         let _parentDom = document.getElementById("dashboard-container");
         let _ch = parseInt(_parentDom.clientHeight - 100);
 
-        return Math.min(_width, _ch, 500)
+        return Math.min(_width, _ch, 600)
     }
 };

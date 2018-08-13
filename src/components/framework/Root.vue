@@ -2,7 +2,7 @@
     <v-app dark>
         <v-toolbar app fixed clipped-left>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>{{appName}}</v-toolbar-title> 
+            <v-toolbar-title>{{appName}}</v-toolbar-title>
             <v-spacer></v-spacer>
             <ModuleToolbar/>
         </v-toolbar>
@@ -14,7 +14,7 @@
                     <v-list dense>
                         <v-list-tile v-for="item in items" @click="toggle(item)" :key="item.key" v-bind:class="{ active: isItemActive(item.key) }">
                             <v-list-tile-action>
-                                <v-icon>{{ item.key }}</v-icon>
+                                <v-icon>{{ item.icon }}</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-content>
                                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -50,11 +50,19 @@ export default {
                 {
                     title: '主页',
                     key: 'dashboard',
+                    icon: 'dashboard',
                     active: '/',
                 },
                 {
                     title: '设置',
                     key: 'settings',
+                    icon: 'settings',
+                    active: '/',
+                },
+                {
+                    title: '分析',
+                    key: 'analysis',
+                    icon: 'art_track',
                     active: '/',
                 },
             ]
@@ -64,7 +72,7 @@ export default {
             return this.activeItem === key;
         },
         toggle(item) {
-            this.activeItem = item.key; 
+            this.activeItem = item.key;
             this.$router.push({ name: item.key });
         }
     }

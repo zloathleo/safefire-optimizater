@@ -18,8 +18,19 @@ import globalvar from '../../common/globalvar'
 export default {
     components: {
     },
+    props: {
+        calc: {
+            type: String,
+            default: "w"
+        },
+        pixel: {
+            type: String,
+            default: "10"
+        },
+    },
     data() {
         return {
+            chartDataIndex: 0,
             chart: undefined,
             chartOption: this.getOption(),
         }
@@ -30,21 +41,61 @@ export default {
         this.$globalEventHub.$on("periodChanged", function (value) {
             _this.refreshData();
         });
+
+        this.$globalEventHub.$on("periodNext", function (value) {
+            _this.refreshData();
+        });
     },
     methods: {
         refreshData() {
             let _this = this;
 
+            console.log(this.calc);
             this.chart.showLoading(globalvar.loadingConfig);
-            this.$myfetch.fetch('/heatchart', { method: 'GET' }, function (json) {
+
+            let params = new URLSearchParams();
+            params.append('index', this.chartDataIndex);
+            params.append('calc', this.calc);
+            params.append('pixel', this.pixel);
+
+            this.$myfetch.fetch('/probabilitychart?' + params.toString(), { method: 'GET' }, function (json) {
                 _this.chart.hideLoading();
+
+                _this.chartDataIndex++;
+
+
+                let _data = json.data;
+                let w = json.w;
+                let h = json.h; 
+
+                let xData = [];
+                let yData = [];
+                for (let i = 0; i < w; i++) {
+                    xData.push(i);
+                }
+                for (let j = 0; j < h; j++) {
+                    yData.push(j);
+                }
+
+                let index = 0;
+                let heatChartdata = _data.map(function (item) {
+                    let x = index % w;
+                    let y = Math.floor(index / w);
+                    index++;
+                    return [x, y, item];
+                });
 
                 // 填入数据
                 _this.chart.setOption({
+                    xAxis: {
+                        data: xData
+                    },
+                    yAxis: {
+                        data: yData
+                    },
                     series: [{
-                        // 根据名字对应到相应的系列
                         name: 'value',
-                        data: json.data
+                        data: heatChartdata
                     }]
                 });
 
@@ -57,7 +108,7 @@ export default {
 
             this.chart = echarts.init(chartDom, undefined, {
                 width: _width,
-                height: _width
+                height: _width / 1.334
             });
             this.chart.setOption(this.chartOption);
             this.refreshData();
@@ -89,14 +140,14 @@ export default {
                 },
                 xAxis: {
                     type: 'category',
-                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
+                    data: [],
                     splitArea: {
                         show: true
                     }
                 },
                 yAxis: {
                     type: 'category',
-                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
+                    data: [],
                     splitArea: {
                         show: true
                     }
@@ -104,26 +155,22 @@ export default {
                 visualMap: {
                     min: 0,
                     max: 10,
-                    calculable: false,
-                    // orient: 'horizontal',
+                    calculable: false,//显示拖拽用的手柄 
                     // left: 'center',
                     show: false,
-                    // bottom: '3%'
+                    inRange: {
+                        // colorAlpha: [0.5, 1],
+                        opacity: [0.7, 1],
+                        color: ['#2196F3', '#4CAF50', '#FFEB3B', '#FF5722', '#BF360C']
+                        // color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+                    }
                 },
                 series: [{
                     name: 'value',
                     type: 'heatmap',
-                    label: {
-                        normal: {
-                            show: true
-                        }
-                    },
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
+                    // 渐进式渲染时每一帧绘制图形数量
+                    progressive: 2000,
+                    animation: false
                 }]
             };
         }

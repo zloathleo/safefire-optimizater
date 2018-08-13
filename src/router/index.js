@@ -25,6 +25,12 @@ export default new Router({
           path: '/settings',
           component: resolve => require(['../pages/Settings.vue'], resolve),
           meta: { title: '设置' }
+        },
+        {
+          name: 'analysis',
+          path: '/analysis',
+          component: resolve => require(['../pages/AnalysisPage.vue'], resolve),
+          meta: { title: '分析' }
         }
       ]
     },

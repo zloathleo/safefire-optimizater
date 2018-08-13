@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 import myfetch from './common/myfetch';
-import './common/mock';
+//是否模拟数据
+// import './common/mock';
 
 import router from './router'
 import App from './App'

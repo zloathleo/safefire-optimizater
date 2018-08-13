@@ -1,8 +1,8 @@
 <template>
-  <div id="dashboard" :style="{width: '100%', height: dashboardHeight}">
+  <div :style="{width: '100%', height: dashboardHeight}">
     <div id="dashboard-container" style="width: 100%; height: 100%; overflow-x: hidden;overflow-y: auto;">
       <v-layout row wrap>
-        <v-flex v-if="dasCard" xs12 sm4 md4 lg3 offset-lg1>
+        <v-flex v-if="dasCard" xs12 sm4 md2 lg2>
           <v-slide-x-transition>
             <DasCard />
           </v-slide-x-transition>
@@ -10,10 +10,10 @@
 
         <v-flex xs12 v-bind:class="mainBindClass">
           <v-layout row wrap>
-            <v-flex xs12 sm6 md6 lg6>
+            <v-flex xs12 sm12 md6 lg6>
               <HeatChart />
             </v-flex>
-            <v-flex xs12 sm6 md6 lg6>
+            <v-flex xs12 sm12 md6 lg6>
               <TrendChart />
             </v-flex>
           </v-layout>
@@ -60,16 +60,16 @@ export default {
       if (this.dasCard) {
         return {
           'sm8': true,
-          'md8': true,
-          'lg7': true,
+          'md10': true,
+          'lg10': true,
         }
       } else {
         return {
-          'sm12': true,
-          'md8': true,
-          'lg7': true,
-          'offset-md2': true,
-          'offset-lg2': true
+          'sm8': true,
+          'md10': true,
+          'lg10': true,
+          'offset-md1': true,
+          'offset-lg1': true
         }
       }
     },
