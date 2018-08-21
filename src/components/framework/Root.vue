@@ -54,15 +54,15 @@ export default {
                     active: '/',
                 },
                 {
-                    title: '设置',
+                    title: '硬件控制',
                     key: 'settings',
                     icon: 'settings',
                     active: '/',
                 },
                 {
-                    title: '分析',
-                    key: 'analysis',
-                    icon: 'art_track',
+                    title: '报警',
+                    key: 'alarm',
+                    icon: 'alarm',
                     active: '/',
                 },
             ]

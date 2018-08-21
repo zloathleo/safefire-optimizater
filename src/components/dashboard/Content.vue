@@ -20,24 +20,35 @@
 
           <v-layout row wrap>
             <v-flex xs6 sm3>
-              <Gauge title="回转窑压力"/>
+              <Gauge title="回转窑压力" />
             </v-flex>
             <v-flex xs6 sm3>
-              <Gauge title="一次风温度"/>
+              <Gauge title="一次风温度" />
             </v-flex>
             <v-flex xs6 sm3>
-              <Gauge title="一次风风量"/>
+              <Gauge title="一次风风量" />
             </v-flex>
             <v-flex xs6 sm3>
-              <Gauge title="二次风温度"/>
+              <Gauge title="二次风温度" />
             </v-flex>
           </v-layout>
-        </v-flex>
+        </v-flex> 
 
       </v-layout>
     </div>
   </div>
 </template>
+
+<style>
+/* This is for documentation purposes and will not be needed in your application */
+#lateral .v-speed-dial,
+#lateral .v-btn--floating {
+  position: absolute;
+}
+#lateral .v-btn--floating {
+  margin: 0 0 16px 16px;
+}
+</style>
 
 <script>
 import HeatChart from './HeatChart.vue';

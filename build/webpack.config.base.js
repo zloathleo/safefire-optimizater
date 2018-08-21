@@ -7,9 +7,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const utils = require('./utils')
 
+const vuePkg = [
+  'vue',
+  'vue-router',
+  'vuetify',
+];
+
 module.exports = {
   entry: {
     index: utils.resolve('src/index.js'),
+    vue: vuePkg,
   },
 
   output: {
@@ -24,19 +31,27 @@ module.exports = {
   },
 
   optimization: {
-    runtimeChunk: true,
-
     splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
       cacheGroups: {
-        vendor: { // 将第三方模块提取出来
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          priority: 10, // 优先
-          enforce: true
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minSize: 0,
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
         }
-      },
-    },
+      }
+    }
   },
 
   module: {
@@ -107,14 +122,14 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css"
     }),
-    
+
     new HtmlWebpackPlugin({
       template: utils.resolve('src/assets/ejs/index.ejs'),
       filename: utils.resolve('public/index.html'),
       hash: true,
       inject: true
     }),
-    new VueLoaderPlugin(), 
+    new VueLoaderPlugin(),
 
     // new CopyWebpackPlugin([{
     //   from: utils.resolve('assets/img'),

@@ -27,6 +27,12 @@ export default new Router({
           meta: { title: '设置' }
         },
         {
+          name: 'alarm',
+          path: '/alarm',
+          component: resolve => require(['../pages/AlarmPage.vue'], resolve),
+          meta: { title: '报警' }
+        },
+        {
           name: 'analysis',
           path: '/analysis',
           component: resolve => require(['../pages/AnalysisPage.vue'], resolve),

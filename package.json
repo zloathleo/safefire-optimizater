@@ -21,6 +21,7 @@
     "start": "electron .",
     "packexe": "electron-builder --ia32",
     "dev": "webpack --watch --config build/webpack.config.dev.js",
+    "devone": "webpack --config build/webpack.config.dev.js",
     "prod": "webpack --config build/webpack.config.prod.js",
     "prods": "webpack-dev-server --open --progress --config build/webpack.config.prod.js",
     "lint": "eslint --ext .js,.vue src",
